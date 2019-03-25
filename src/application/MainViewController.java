@@ -1,12 +1,11 @@
 package application;
 
-import java.io.IOError;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -28,7 +28,8 @@ public class MainViewController {
 	FXMLLoader fxmlLoader;
 	Stage stage;
 	Parent root;
-	
+	@FXML
+	private ChoiceBox cbxItem1Name,cbxItem2Name,cbxItem3Name,cbxItem4Name, cbxOrderStatus;
 	 @FXML
 	    private TextField txtEmployeeName;
 
@@ -48,6 +49,15 @@ public class MainViewController {
 	    private MaskedTextField txtCustomerPhone;
 
 	    @FXML
+	    private DatePicker dtpDateLeft;
+
+	    @FXML
+	    private DatePicker dtpDateExpected;
+
+	    @FXML
+	    private DatePicker dtpDatePickedUp;
+
+	    @FXML
 	    private TextField dtpTimeLeft;
 
 	    @FXML
@@ -57,28 +67,8 @@ public class MainViewController {
 	    private TextField dtpTimePickedUp;
 
 	    @FXML
-	    private DateTimePicker dtpDateLeft;
-
-	    @FXML
-	    private DateTimePicker dtpDateExpected;
-
-	    @FXML
-	    private DateTimePicker dtpDatePickedUp;
-
-	    @FXML
 	    private TextField txtUnitPriceItem2;
 
-	    @FXML
-	    private ChoiceBox cbxItem1Name;
-
-	    @FXML
-	    private ChoiceBox cbxItem2Name;
-
-	    @FXML
-	    private ChoiceBox cbxItem3Name;
-
-	    @FXML
-	    private ChoiceBox cbxItem4Name;
 
 	    @FXML
 	    private TextField txtUnitPriceShirts;
@@ -146,8 +136,8 @@ public class MainViewController {
 	    @FXML
 	    private Button btnSave;
 
-	    @FXML
-	    private ChoiceBox cbxOrderStatus;
+	   // @FXML
+	  //  private ChoiceBox<?> cbxOrderStatus;
 
 	    @FXML
 	    private TextField txtCleaningOrderID;
@@ -163,8 +153,10 @@ public class MainViewController {
 
 	    @FXML
 	    private Button btnClose;
+
+	 
 	
-	ObservableList<String> cbxItem1NameList,cbxItem2NameList,cbxItem3NameList,cbxItem4NameList;
+	ObservableList<String> cbxItem1NameList,cbxItem2NameList,cbxItem3NameList,cbxItem4NameList, cbxOrderStatusList;
 	@FXML
 	private void initialize() {
 		cbxItem1NameList = FXCollections.observableArrayList("None","Women Suit", "Dress",
@@ -179,6 +171,8 @@ public class MainViewController {
 		cbxItem4NameList = FXCollections.observableArrayList("None","Women Suit", "Dress",
 				"Regular Skirt","Skirt With Hook", "Men's Suit 2Pc", "Men's Suit 3Pc", 
 				"Sweaters", "Silk Shirt", "Tie", "Coat", "Jacket", "Swede");
+		cbxOrderStatusList = FXCollections.observableArrayList("Not Yet Ready", "Clean and Ready for Pickup", "Picked Up");
+		
 		
 		cbxItem1Name.setItems(cbxItem1NameList);
 		cbxItem1Name.getSelectionModel().selectFirst();
@@ -188,11 +182,13 @@ public class MainViewController {
 		cbxItem3Name.getSelectionModel().selectFirst();
 		cbxItem4Name.setItems(cbxItem4NameList);
 		cbxItem4Name.getSelectionModel().selectFirst();
+		cbxOrderStatus.setItems(cbxOrderStatusList);
+		cbxOrderStatus.getSelectionModel().selectFirst();
 	}
     @FXML
     void btnNewCustomer(ActionEvent event) {
     	try {
-    	fxmlLoader = new FXMLLoader(getClass().getResource("/application/customer01.fxml"));
+    	fxmlLoader = new FXMLLoader(getClass().getResource("customers.fxml"));
     	root = (Parent) fxmlLoader.load();
     	Stage stage = new Stage();
     	stage.setScene(new Scene(root));
@@ -205,7 +201,7 @@ public class MainViewController {
     @FXML
     void btnNewEmployee(ActionEvent event) {
     	try {
-    	fxmlLoader = new FXMLLoader(getClass().getResource("/application/employee.fxml"));
+    	fxmlLoader = new FXMLLoader(getClass().getResource("employee1.fxml"));
     	root = (Parent) fxmlLoader.load();
     	stage = new Stage();
     	stage.setScene(new Scene(root));
@@ -217,19 +213,44 @@ public class MainViewController {
     }
     
     @FXML
+    void btnSave(ActionEvent event) {
+    	 stage = (Stage) btnSave.getScene().getWindow();
+         stage.close();
+    }
+    
+    @FXML
+    void test(ActionEvent event) {
+    	/*System.out.println(txtCleaningOrderID.getText());
+    	try {
+			// create a mysql database connection
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/georgetowndrycleaner", "root", "saruul0201");			
+			Statement myStmt = (Statement) conn.createStatement();
+			ResultSet myRs = ((java.sql.Statement) myStmt).executeQuery("select * from customers");
+			while (myRs.next()) {
+				System.out.println(myRs.getString(""));
+			}
+			conn.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}*/
+    	 //System.out.println(((TextField)event.getSource()).getId());
+    }
+    
+    @FXML
     void btnClose(ActionEvent event) {
         stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
     }
-	@FXML
+    @FXML
 	void btnNewCleaningOrder(ActionEvent event) {
-		txtEmployeeNumber.setText("");
+    	System.out.println("test");
+		/*txtEmployeeNumber.setText("");
 		txtEmployeeName.setText("");
 		txtCustomerPhone.setText("");
 		txtCustomerName.setText("");
 		txtCleaningOrderID.setText("");
 		
-		LocalDate ubtime = LocalDate.now(ZoneId.of("Asia/Kolkata"));
+		LocalDate ubtime = LocalDate.now(ZoneId.of("Asia/Ulaanbaatar"));
 		dtpDateLeft.setValue(ubtime);
 //		dtpTimeLeft.setValue(ubtime);
 		dtpDateExpected.setValue(ubtime);
@@ -266,142 +287,153 @@ public class MainViewController {
 	    txtTaxAmount.setText("0.00");
 	    txtCleaningTotal.setText("0.00");
 	    txtNotes.setText("");
-	    txtEmployeeNumber.requestFocus();
+	    txtEmployeeNumber.requestFocus();*/
 	}
 	
 	@FXML
-	
 	private void calcPrice(KeyEvent event) {
-//		if())
-		Node n =(Node)event.getSource();
-		System.out.println();
-		switch(n.getId()) {
-		case "txtUnitPriceShirts":
-		case "txtQuantityShirts":
-			if(txtUnitPriceShirts.getText().length()>0 && txtQuantityShirts.getText().length()>0) {
-			txtSubTotalShirts.setText(""+strToDouble(txtUnitPriceShirts.getText())*strToDouble(txtQuantityShirts.getText()));
-			}
-			break;
-		}
+
+		txtQuantityShirts.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="") 
+			txtSubTotalShirts.setText(""+strToDouble(txtUnitPriceShirts.getText())*strToDouble(txtQuantityShirts.textProperty().get()));
+			});
+		txtUnitPriceShirts.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalShirts.setText(""+strToDouble(newValue)*strToDouble(txtQuantityShirts.getText()));
+		});
 		
-//		event.
-	}
-	
-	private Double strToDouble(String s) {
-		return Double.parseDouble(s);
-	}
-	
-	private void btnSave_Click()
-	{
+		txtQuantityPants.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalPants.setText(""+strToDouble(txtUnitPricePants.getText())*strToDouble(txtQuantityPants.textProperty().get()));
+		});
+		txtUnitPricePants.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalPants.setText(""+strToDouble(newValue)*strToDouble(txtQuantityPants.getText()));
+		});
 
-//		// If the Receipt Number is empty, it appears that
-//		// the user/clerk wants to create a new cleaning order
-//		if (txtCleaningOrderID.Text.Length == 0)
-//		{
-//		    strCommand = "INSERT INTO CleaningOrders( " +
-//				 "EmployeeNumber, CustomerNumber, DateLeft, " +
-//				 "TimeLeft, DateExpected, TimeExpected, " +
-//				 "OrderStatus, DatePickedUp, " +
-//				 "TimePickedUp, UnitPriceShirts, " +
-//				 "QuantityShirts, SubTotalShirts, " +
-//				 "UnitPricePants, QuantityPants, " +
-//				 "SubTotalPants, Item1Name, " +
-//				 "UnitPriceItem1, QuantityItem1, " +
-//				 "SubTotalItem1, Item2Name, " +
-//				 "UnitPriceItem2, QuantityItem2, " +
-//				 "SubTotalItem2, Item3Name, " +
-//				 "UnitPriceItem3, QuantityItem3, " +
-//				 "SubTotalItem3, Item4Name, " +
-//				 "UnitPriceItem4, QuantityItem4, " +
-//				 "SubTotalItem4, CleaningTotal, " +
-//				 "TaxRate, TaxAmount, NetPrice, Notes) " +
-//				 "VALUES('" + txtEmployeeNumber.getText() + "', '" +
-//				 txtCustomerPhone.getText() + "', '" +
-//				 dtpDateLeft.getValue().toString() + "', '" +
-////				 dtpTimeLeft.getText().ToString("t") + "', '" +
-//				 dtpDateExpected.getValue().toString() + "', '" +
-////				 dtpTimeExpected.Value.ToString("t") + "', '" +
-//				 cbxOrderStatus.getValue().toString() + "', '" +
-//				 dtpDatePickedUp.getValue().toString() + "', '" +
-//				 dtpDatePickedUp.getValue().toString() + "', '" +
-//				 txtUnitPriceShirts.getText() + "', '" + 
-//				 txtQuantityShirts.getText() + "', '" + 
-//				 txtSubTotalShirts.getText() + "', '" +
-//				 txtUnitPricePants.getText() + "', '" + 
-//				 txtQuantityPants.getText() + "', '" +
-//				 txtSubTotalPants.getText() + "', '" + 
-////				 cbxItem1Name.get + "', '" +
-//				 txtUnitPriceItem1.getText() + "', '" + 
-//				 txtQuantityItem1.getText() + "', '" +
-//				 txtSubTotalItem1.getText() + "', '" + 
-////				 cbxItem2Name.getText() + "', '" +
-//				 txtUnitPriceItem2.getText() + "', '" + 
-//				 txtQuantityItem2.getText() + "', '" +
-//				 txtSubTotalItem2.getText() + "', '" + 
-////				 cbxItem3Name.getText() + "', '" +
-//				 txtUnitPriceItem3.getText() + "', '" + 
-//				 txtQuantityItem3.getText() + "', '" +
-//				 txtSubTotalItem3.getText() + "', '" + 
-////				 cbxItem4Name.getText() + "', '" +
-//				 txtUnitPriceItem4.getText() + "', '" + 
-//				 txtQuantityItem4.getText() + "', '" +
-//				 txtSubTotalItem4.getText() + "', '" + 
-//				 txtCleaningTotal.getText() + "', '" +
-//				 txtTaxRate.getText() + "', '" + 
-//				 txtTaxAmount.getText() + "', '" +
-//				 txtNetPrice.getText() + "', '" + txtNotes.getText() + "');";
-//		}
-//		else // Since there is a receipt number, update/edit the cleaning order
-//		{
-//		    strCommand = "UPDATE CleaningOrders " +
-//				 "SET EmployeeNumber = '" +
-//				 txtEmployeeNumber.getText() + "', " +
-//				" CustomerNumber = '" + txtCustomerPhone.getText() + "', " +
-////			" DateLeft = '" + dtpDateLeft.Value.ToString("d") + "', " +
-////			" TimeLeft = '" + dtpTimeLeft.Value.ToString("t") + "', " +
-////			" DateExpected = '" + dtpDateExpected.Value.ToString("d") + "', " +
-////			" TimeExpected = '" + dtpTimeExpected.Value.ToString("t") + "', " +
-////			" OrderStatus = '" + cbxOrderStatus.getText() + "', " +
-////			" DatePickedUp = '" + dtpDatePickedUp.Value.ToString("d") + "', " +
-////			" TimePickedUp = '" + dtpDatePickedUp.Value.ToString("t") + "', " +
-//			" UnitPriceShirts = '" + txtUnitPriceShirts.getText() + "', " +
-//			" QuantityShirts = '" + txtQuantityShirts.getText() + "', " +
-//			" SubTotalShirts = '" + txtSubTotalShirts.getText() + "', " +
-//			" UnitPricePants = '" + txtUnitPricePants.getText() + "', " +
-//			" QuantityPants = '" + txtQuantityPants.getText() + "', " +
-//			" SubTotalPants = '" + txtSubTotalPants.getText() + "', " +
-////			" Item1Name = '" + cbxItem1Name.Text + "', " +
-//			" UnitPriceItem1 = '" + txtUnitPriceItem1.getText() + "', " +
-//			" QuantityItem1 = '" + txtQuantityItem1.getText() + "', " +
-//			" SubTotalItem1 = '" + txtSubTotalItem1.getText() + "', " +
-////			" Item2Name = '" + cbxItem2Name.Text + "', " +
-//			" UnitPriceItem2 = '" + txtUnitPriceItem2.getText() + "', " +
-//			" QuantityItem2 = '" + txtQuantityItem2.getText() + "', " +
-//			" SubTotalItem2 = '" + txtSubTotalItem2.getText() + "', " +
-////			" Item3Name = '" + cbxItem3Name.Text + "', " +
-//			" UnitPriceItem3 = '" + txtUnitPriceItem3.getText() + "', " +
-//			" QuantityItem3 = '" + txtQuantityItem3.getText() + "', " +
-//			" SubTotalItem3 = '" + txtSubTotalItem3.getText() + "', " +
-////			" Item4Name = '" + cbxItem4Name.Text + "', " +
-//			" UnitPriceItem4 = '" + txtUnitPriceItem4.getText() + "', " +
-//			" QuantityItem4 = '" + txtQuantityItem4.getText() + "', " +
-//			" SubTotalItem4 = '" + txtSubTotalItem4.getText() + "', " +
-//			" CleaningTotal = '" + txtCleaningTotal.getText() + "', " +
-//			" TaxRate = '" + txtTaxRate.getText() + "', " +
-//			" TaxAmount = '" + txtTaxAmount.getText() + "', " +
-//			" NetPrice = '" + txtNetPrice.getText() + "', " +
-//			" Notes = '" + txtNotes.getText() + "' " +
-//			" WHERE CleaningOrderID = '" + txtCleaningOrderID.getText() + "';";
-//		}
+		txtQuantityItem1.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalItem1.setText(""+strToDouble(txtUnitPriceItem1.getText())*strToDouble(newValue));
+		});
+		txtUnitPriceItem1.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalItem1.setText(""+strToDouble(newValue)*strToDouble(txtQuantityItem1.getText()));
+		});
+		
+		
+		txtQuantityItem2.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalItem2.setText(""+strToDouble(txtUnitPriceItem2.getText())*strToDouble(newValue));
+		});
+		txtUnitPriceItem2.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalItem2.setText(""+strToDouble(newValue)*strToDouble(txtQuantityItem2.getText()));
+		});
+		
+		
+		txtQuantityItem3.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalItem3.setText(""+strToDouble(txtUnitPriceItem3.getText())*strToDouble(newValue));
+		});
+		txtUnitPriceItem3.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalItem3.setText(""+strToDouble(newValue)*strToDouble(txtQuantityItem3.getText()));
+		});
+		
+		
+		txtQuantityItem4.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalItem4.setText(""+strToDouble(txtUnitPriceItem4.getText())*strToDouble(newValue));
+		});
+		txtUnitPriceItem4.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue!="")
+			txtSubTotalItem4.setText(""+strToDouble(newValue)*strToDouble(txtQuantityItem4.getText()));
+		});
+		calcCleaningTotal();
+		calcTaxAmount();
+		calcNetPrice();
+	}
+	
+	
+//	@FXML
+//	private void calcPrice(KeyEvent event) {
+//		Node n =(Node)event.getSource();
+//		switch(n.getId()) {
+//		case "txtUnitPriceShirts":
+//		case "txtQuantityShirts":
+//			if(txtUnitPriceShirts.getText().length()>0 && txtQuantityShirts.getText().length()>0) {
+//			txtSubTotalShirts.setText(""+strToDouble(txtUnitPriceShirts.getText())*strToDouble(txtQuantityShirts.getText()));
 //
-////		SqlCommand cmdCleaningOrders = new SqlCommand(strCommand,
-////		cnnCleaningOrders);
-////
-////		cnnCleaningOrders.Open();
-////		cmdCleaningOrders.ExecuteNonQuery();
-////
-////		btnNewCleaningOrder_Click(sender, e);
-//	    }
+////				txtSubTotalShirts.setText(""+strToDouble(txtUnitPriceShirts.getText())*strToDouble(txtQuantityShirts.textProperty().get()));
+//			}
+//			break;
+//		case "txtUnitPricePants":
+//		case "txtQuantityPants":
+//			if(txtUnitPricePants.getText().length()>0 && txtQuantityPants.getText().length()>0) {
+//				txtSubTotalPants.setText(""+strToDouble(txtUnitPricePants.getText())*strToDouble(txtQuantityPants.getText()));
+//			}
+//			break;
+//		case "txtUnitPriceItem1":
+//		case "txtQuantityItem1":
+//			if(txtUnitPriceItem1.getText().length()>0 && txtQuantityItem1.getText().length()>0) {
+//				txtSubTotalItem1.setText(""+strToDouble(txtUnitPriceItem1.getText())*strToDouble(txtQuantityItem1.getText()));
+//			}
+//			break;
+//		case "txtUnitPriceItem2":
+//		case "txtQuantityItem2":
+//			if(txtUnitPriceItem2.getText().length()>0 && txtQuantityItem2.getText().length()>0) {
+//				txtSubTotalItem2.setText(""+strToDouble(txtUnitPriceItem2.getText())*strToDouble(txtQuantityItem2.getText()));
+//			}
+//			break;
+//		case "txtUnitPriceItem3":
+//		case "txtQuantityItem3":
+//			if(txtUnitPriceItem3.getText().length()>0 && txtQuantityItem3.getText().length()>0) {
+//				txtSubTotalItem3.setText(""+strToDouble(txtUnitPriceItem3.getText())*strToDouble(txtQuantityItem3.getText()));
+//			}
+//			break;
+//		case "txtUnitPriceItem4":
+//		case "txtQuantityItem4":
+//			if(txtUnitPriceItem4.getText().length()>0 && txtQuantityItem4.getText().length()>0) {
+//				txtSubTotalItem4.setText(""+strToDouble(txtUnitPriceItem4.getText())*strToDouble(txtQuantityItem4.getText()));
+//			}
+//			break;
+//		}
+//		
+//		calcCleaningTotal();
+//		calcTaxAmount();
+//		calcNetPrice();
 //	}
+	
+	@FXML
+	private void calcCleaningTotal() {
+		txtCleaningTotal.setText(""+
+		(Float.parseFloat(txtSubTotalShirts.getText())+
+		Float.parseFloat(txtSubTotalPants.getText())+
+		Float.parseFloat(txtSubTotalItem1.getText())+
+		Float.parseFloat(txtSubTotalItem2.getText())+
+		Float.parseFloat(txtSubTotalItem3.getText())+
+		Float.parseFloat(txtSubTotalItem4.getText()))
+				);
+	}
+	
+	private void calcTaxAmount() {
+		txtTaxAmount.setText(""+(Float.parseFloat(txtCleaningTotal.getText())*
+							Float.parseFloat(txtTaxRate.getText()))/100);
+	}
+	
+	private void calcNetPrice(){
+		txtNetPrice.setText(String.valueOf(Float.parseFloat(txtCleaningTotal.getText())-Float.parseFloat(txtTaxAmount.getText())));
+	}
+	
+	private Float strToDouble(String s) {
+		  if (s != null && s.length() > 0) {
+		       try {
+		          return Float.parseFloat(s);
+		       } catch(Exception e) {
+		          return (float)-1;  
+		       }
+		   }
+		   else return (float)0;
+	}
 
-	}}
+}

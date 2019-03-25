@@ -1,6 +1,5 @@
-
-
 package application;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -9,7 +8,6 @@ public class customer {
 	private final StringProperty customerID;
 	private final StringProperty phoneNumber;
 	private final StringProperty fullName;
-	
 	
 	public customer(String customerID, String phoneNumber, String fullName) {
 		this.customerID = new SimpleStringProperty(customerID);

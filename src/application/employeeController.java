@@ -81,8 +81,7 @@ public class employeeController implements Initializable {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			// create a mysql database connection
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/georgetowndrycleaner", "root",
-					"");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/georgetowndrycleaner", "root", "saruul0201");
 			Statement myStmt = (Statement) conn.createStatement();
 			ResultSet myRs = ((java.sql.Statement) myStmt).executeQuery("select * from employees");
 
@@ -111,8 +110,7 @@ public class employeeController implements Initializable {
 
 		try {
 
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/georgetowndrycleaner", "root",
-					"");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/georgetowndrycleaner", "root", "saruul0201");
 			Statement myStmt = (Statement) conn.createStatement();
 			String sql = "INSERT INTO employees(FirstName, LastName,  FullName, Title, EmployeeNumber, HourlySalary) VALUES ('"
 					+ txtFirstName.getText() + "','" + txtLastName.getText() + "','" + txtFirstName.getText() + ", "

@@ -173,7 +173,7 @@
                               <TextField fx:id="txtUnitPriceItem1" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <TextField fx:id="txtUnitPriceItem3" prefWidth="100.0" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                               <TextField fx:id="txtUnitPriceItem4" prefWidth="100.0" text="0.00" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <TextField fx:id="txtQuantityShirts" onKeyTyped="#calcPrice" prefWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextField fx:id="txtQuantityShirts" onInputMethodTextChanged="#calcPrice" prefWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <TextField fx:id="txtQuantityPants" prefWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                               <TextField fx:id="txtQuantityItem1" prefWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                               <TextField fx:id="txtQuantityItem2" prefWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
