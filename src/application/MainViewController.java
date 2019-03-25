@@ -295,7 +295,7 @@ public class MainViewController {
 
 		txtQuantityShirts.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(newValue!="") 
-			txtSubTotalShirts.setText(""+strToDouble(txtUnitPriceShirts.getText())*strToDouble(txtQuantityShirts.textProperty().get()));
+			txtSubTotalShirts.setText(""+strToDouble(txtUnitPriceShirts.getText())*strToDouble(newValue));
 			});
 		txtUnitPriceShirts.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(newValue!="")
@@ -304,7 +304,7 @@ public class MainViewController {
 		
 		txtQuantityPants.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(newValue!="")
-			txtSubTotalPants.setText(""+strToDouble(txtUnitPricePants.getText())*strToDouble(txtQuantityPants.textProperty().get()));
+			txtSubTotalPants.setText(""+strToDouble(txtUnitPricePants.getText())*strToDouble(newValue));
 		});
 		txtUnitPricePants.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(newValue!="")
