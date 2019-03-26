@@ -117,12 +117,12 @@
                               <Label text="Time Left:" GridPane.columnIndex="2" />
                               <Label text="Time Expected:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <Label text="Time Picked Up:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                              <TextField fx:id="dtpTimeLeft" GridPane.columnIndex="3" />
-                              <TextField fx:id="dtpTimeExpected" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <TextField fx:id="dtpTimePickedUp" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                               <DateTimePicker fx:id="dtpDateLeft" format="yyyy-MM-dd" prefHeight="26.0" prefWidth="224.0" GridPane.columnIndex="1" />
                               <DateTimePicker fx:id="dtpDateExpected" format="yyyy-MM-dd" prefHeight="26.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <DateTimePicker fx:id="dtpDatePickedUp" format="yyyy-MM-dd" prefHeight="26.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <MaskedTextField fx:id="dtpTimeLeft" mask="##:##" text="00:00" GridPane.columnIndex="3" />
+                              <MaskedTextField fx:id="dtpTimeExpected" mask="##:##" promptText="00:00" text="00:00" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <MaskedTextField fx:id="dtpTimePickedUp" mask="##:##" text="00:00" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="20.0" right="10.0" top="20.0" />

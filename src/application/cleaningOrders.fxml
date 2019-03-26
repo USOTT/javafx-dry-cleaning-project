@@ -121,7 +121,7 @@
                               <DateTimePicker fx:id="dtpDateExpected" format="yyyy-MM-dd" prefHeight="26.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <DateTimePicker fx:id="dtpDatePickedUp" format="yyyy-MM-dd" prefHeight="26.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <MaskedTextField fx:id="dtpTimeLeft" mask="##:##" text="00:00" GridPane.columnIndex="3" />
-                              <MaskedTextField fx:id="dtpTimeExpected" mask="##:##" text="00:00" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <MaskedTextField fx:id="dtpTimeExpected" mask="##:##" promptText="00:00" text="00:00" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                               <MaskedTextField fx:id="dtpTimePickedUp" mask="##:##" text="00:00" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                            </children>
                            <padding>
